@@ -3,6 +3,11 @@
   background: var(--blanc);
 }
 
+.quote {
+  font-style: italic;
+  font-weight: 600;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;

@@ -1,0 +1,61 @@
+<!-- Section avis — à placer juste après la section #contact -->
+<section class="avis-section">
+
+  <!-- Image qui surgit depuis la gauche au hover sur "Non" -->
+  <div class="president-peek" [class.visible]="peeking">
+    <img src="browt.jpg" alt="Élie for Président" />
+  </div>
+
+    <div class="president-peek-2" [class.visible]="peeking2">
+    <img src="browt2.webp" alt="Élie for Président" />
+  </div>
+
+  <div class="container">
+    <div class="avis-inner">
+
+      <p class="avis-question">
+        Aimez-vous votre nouveau
+        <s class="dicta">dictateur</s>
+        <span class="accent"> Président</span>&nbsp;?
+      </p>
+
+      <div class="avis-buttons" [class.converted]="allYes">
+
+        <!-- Bouton OUI -->
+        <button
+          class="avis-btn btn-oui"
+          [class.forced]="allYes"
+          (click)="onOui()"
+        >
+          <span class="btn-label">{{ allYes ? '✅ Oui !' : 'Oui' }}</span>
+          <span class="btn-shine"></span>
+        </button>
+
+        <!-- Bouton NON -->
+        <button
+          class="avis-btn btn-non"
+          [class.forced]="allYes"
+          (mouseenter)="onNonHover()"
+          (mouseleave)="onNonLeave()"
+          (click)="onNon()"
+        >
+          <span class="btn-label">{{ allYes ? '✅ Oui !' : 'Non' }}</span>
+          <span class="btn-shine"></span>
+        </button>
+
+      </div>
+
+      <!-- Confirmation après clic "Non" -->
+      <div class="confirm-overlay" *ngIf="confirming" (click)="onConfirmBackground($event)">
+        <div class="confirm-card" (click)="$event.stopPropagation()">
+          <p>Vous êtes <strong>sûr(e)</strong> de votre réponse&nbsp;? 🤨</p>
+          <div class="confirm-actions">
+            <button class="confirm-btn confirm-yes" (click)="onConfirmYes()">Oui, je suis sûr(e)</button>
+            <button class="confirm-btn confirm-no"  (click)="onConfirmNo()">Euh… non finalement</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

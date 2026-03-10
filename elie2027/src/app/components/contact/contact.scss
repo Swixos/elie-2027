@@ -1,6 +1,9 @@
 .contact {
+  display: flex;
+  flex-direction: column;
   padding: 120px 0;
   background: var(--blanc);
+  gap: 120px;
 }
 
 .video-link {

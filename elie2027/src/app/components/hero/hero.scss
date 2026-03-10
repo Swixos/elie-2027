@@ -81,6 +81,26 @@
   max-width: 900px;
 }
 
+.hero-poster {
+  margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+
+  img {
+    max-width: 480px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(237, 41, 57, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 50px rgba(237, 41, 57, 0.4);
+    }
+  }
+}
+
 .hero-badge {
   display: inline-flex;
   align-items: center;

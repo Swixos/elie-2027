@@ -1,0 +1,21 @@
+<nav [class.scrolled]="scrolled()" [class.mobile-open]="mobileOpen()">
+  <div class="nav-container">
+    <a href="#" class="logo">
+      <span class="logo-text">ELIE</span>
+      <span class="logo-year">2027</span>
+    </a>
+
+    <div class="nav-links" [class.active]="mobileOpen()">
+      <a href="#programme" (click)="closeMobile()">Programme</a>
+      <a href="#about" (click)="closeMobile()">À propos</a>
+      <a href="#contact" (click)="closeMobile()">Contact</a>
+      <a href="#contact" class="btn btn-primary nav-cta" (click)="closeMobile()">Rejoignez-nous</a>
+    </div>
+
+    <button class="hamburger" (click)="toggleMobile()" [class.active]="mobileOpen()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>

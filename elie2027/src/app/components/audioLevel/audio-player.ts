@@ -22,7 +22,7 @@ export class AudioPlayerComponent implements OnDestroy {
   @Input() set src(value: string) {
     if (this._src !== value) {
       this._src = value;
-      this._hasPlayed = false;
+      this._hasPlayed = false; // Nouveau son → on réinitialise
       this._stop();
     }
   }
@@ -36,13 +36,17 @@ export class AudioPlayerComponent implements OnDestroy {
   @ViewChild('audioRef') audioRef!: ElementRef<HTMLAudioElement>;
 
   isPlaying = false;
-  progress = 0;
+  progress = 0;     // 0–100
+  volume = 100;     // 0–100
+  isMuted = false;
+  showVolumeSlider = false;
   currentTime = '0:00';
   duration = '0:00';
 
   private _src = '';
   private _hasPlayed = false;
   private _animFrame: number | null = null;
+  private _volumeBeforeMute = 100;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -115,13 +119,41 @@ export class AudioPlayerComponent implements OnDestroy {
     audio.currentTime = ratio * audio.duration;
   }
 
+  setVolume(event: Event): void {
+    const value = +(event.target as HTMLInputElement).value;
+    this.volume = value;
+    this.isMuted = value === 0;
+    const audio = this.audioRef?.nativeElement;
+    if (audio) audio.volume = value / 100;
+    // Met à jour la CSS custom property pour le gradient de la track
+    (event.target as HTMLInputElement).style.setProperty('--vol', String(value));
+    this.cdr.markForCheck();
+  }
+
+  toggleMute(): void {
+    const audio = this.audioRef?.nativeElement;
+    if (!audio) return;
+
+    if (this.isMuted) {
+      // Démuter : restaurer le volume précédent (minimum 10)
+      this.volume = this._volumeBeforeMute || 80;
+      this.isMuted = false;
+    } else {
+      this._volumeBeforeMute = this.volume;
+      this.volume = 0;
+      this.isMuted = true;
+    }
+    audio.volume = this.volume / 100;
+    this.cdr.markForCheck();
+  }
+
   // ─── Privé ─────────────────────────────────────────────────────────────────
 
   private _play(): void {
-    // Attendre que la vue soit initialisée
     setTimeout(() => {
       const audio = this.audioRef?.nativeElement;
       if (!audio) return;
+      audio.volume = this.volume / 100;
       audio.currentTime = 0;
       audio.play().catch(() => {
         // Autoplay policy : on ignore silencieusement

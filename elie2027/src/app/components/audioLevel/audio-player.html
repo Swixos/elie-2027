@@ -1,0 +1,30 @@
+<div class="audio-level" *ngIf="src">
+  <button class="play-btn" (click)="togglePlay()" [attr.aria-label]="isPlaying ? 'Pause' : 'Play'">
+    <svg *ngIf="!isPlaying" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+    <svg *ngIf="isPlaying" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+    </svg>
+  </button>
+
+  <span class="label">{{ label }}</span>
+
+  <div class="progress-bar" (click)="seek($event)" role="progressbar"
+       [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-fill" [style.width.%]="progress"></div>
+    <div class="progress-thumb" [style.left.%]="progress"></div>
+  </div>
+
+  <span class="time">{{ currentTime }} / {{ duration }}</span>
+
+  <audio
+    #audioRef
+    [src]="src"
+    (timeupdate)="onTimeUpdate()"
+    (loadedmetadata)="onLoadedMetadata()"
+    (play)="onPlay()"
+    (pause)="onPause()"
+    (ended)="onEnded()"
+  ></audio>
+</div>

@@ -12,6 +12,7 @@ export class AvisComponent {
   /** L'image Élie peek depuis la gauche */
   peeking = false;
   peeking2 = false;
+  peeking3 = false;
 
   /** Modale de confirmation "Non" */
   confirming = false;
@@ -36,6 +37,7 @@ export class AvisComponent {
     if (!this.confirming) {
       this.peeking = false;
       this.peeking2 = false;
+      this.peeking3 = false;
     }
   }
 
@@ -53,6 +55,7 @@ export class AvisComponent {
     this.confirming = false;
     this.peeking = false;
     this.peeking2 = false;
+    this.peeking3 = false;
     this.allYes = true; // les deux boutons deviennent "Oui"
   }
 
@@ -61,6 +64,15 @@ export class AvisComponent {
     this.confirming = false;
     this.peeking = false;
     this.peeking2 = false;
+    this.peeking3 = false;
+  }
+
+  onConfirmYesHover(): void {
+    this.peeking3 = true;
+  }
+
+  onConfirmYesLeave(): void {
+    this.peeking3 = false;
   }
 
   /** Clic en dehors de la card = annuler */

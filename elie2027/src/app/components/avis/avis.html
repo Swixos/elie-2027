@@ -6,8 +6,12 @@
     <img src="browt.jpg" alt="Élie for Président" />
   </div>
 
-    <div class="president-peek-2" [class.visible]="peeking2">
+  <div class="president-peek-2" [class.visible]="peeking2">
     <img src="browt2.webp" alt="Élie for Président" />
+  </div>
+
+  <div class="president-peek-3" [class.visible]="peeking3">
+    <img src="browt3.webp" alt="Élie for Président" />
   </div>
 
   <div class="container">
@@ -50,7 +54,13 @@
         <div class="confirm-card" (click)="$event.stopPropagation()">
           <p>Vous êtes <strong>sûr(e)</strong> de votre réponse&nbsp;? 🤨</p>
           <div class="confirm-actions">
-            <button class="confirm-btn confirm-yes" (click)="onConfirmYes()">Oui, je suis sûr(e)</button>
+            <button class="confirm-btn confirm-yes" 
+            (click)="onConfirmYes()" 
+            (mouseenter)="onConfirmYesHover()"        
+            (mouseleave)="onConfirmYesLeave()"
+            >
+              Oui, je suis sûr(e)
+          </button>
             <button class="confirm-btn confirm-no"  (click)="onConfirmNo()">Euh… non finalement</button>
           </div>
         </div>

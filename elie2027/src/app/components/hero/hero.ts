@@ -13,6 +13,7 @@ export class Hero implements OnInit, OnDestroy {
     { src: 'president1.jpg', alt: 'Elie - Candidat à la Présidentielle 2027' },
     { src: 'president2.png', alt: 'Elie - Président pour la France' },
     { src: 'president3.png', alt: 'Elie - Président pour tous' },
+    { src: 'president4.jpg', alt: 'Elie - Un avenir meilleur pour la France' },
   ];
   private intervalId: ReturnType<typeof setInterval> | null = null;
 

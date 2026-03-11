@@ -18,9 +18,12 @@
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "bad-words": "^3.0.4",
     "cors": "^2.8.6",
     "dompurify": "^3.3.3",
     "express": "^5.2.1",
+    "french-badwords-list": "^1.0.7",
+    "jsdom": "^28.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

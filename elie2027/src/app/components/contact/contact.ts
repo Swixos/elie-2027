@@ -24,19 +24,24 @@ export class Contact implements OnInit {
   messages = signal<ContactMessage[]>([]);
 
   ngOnInit() {
-    this.messages.set(this.contactStorage.getAll());
+    this.loadMessages();
   }
 
   onSubmit() {
-    this.contactStorage.save(this.name(), this.message());
-
-    this.submitted.set(true);
-    this.name.set('');
-    this.email.set('');
-    this.message.set('');
-    this.messages.set(this.contactStorage.getAll());
-
-    setTimeout(() => this.submitted.set(false), 4000);
+    this.contactStorage.save(this.name(), this.message()).subscribe({
+      next: () => {
+        this.submitted.set(true);
+        this.name.set('');
+        this.email.set('');
+        this.message.set('');
+        this.loadMessages();
+        setTimeout(() => this.submitted.set(false), 4000);
+      },
+      error: () => {
+        this.submitted.set(true);
+        setTimeout(() => this.submitted.set(false), 4000);
+      },
+    });
   }
 
   downloadGif() {
@@ -51,5 +56,9 @@ export class Contact implements OnInit {
       hour: '2-digit',
       minute: '2-digit',
     });
+  }
+
+  private loadMessages() {
+    this.contactStorage.getAll().subscribe(msgs => this.messages.set(msgs));
   }
 }

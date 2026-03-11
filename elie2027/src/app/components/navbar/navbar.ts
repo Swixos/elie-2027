@@ -13,7 +13,7 @@ export class Navbar implements OnInit {
 
   ngOnInit() {
     const saved = localStorage.getItem('theme');
-    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (saved === 'dark') {
       this.darkMode.set(true);
       document.documentElement.setAttribute('data-theme', 'dark');
     }

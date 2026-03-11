@@ -11,6 +11,15 @@ const DOMPurify = createDOMPurify(window);
 const BadWords = require('bad-words');
 const frenchBadwordsList = require('french-badwords-list');
 
+const { z } = require('zod');
+const rateLimit = require('express-rate-limit');
+
+
+const MessageSchema = z.object({
+  name: z.string().min(1).max(100),
+  message: z.string().min(1).max(2000),
+});
+
 const badWordsFilter = new BadWords({ placeHolder: '*', emptyList: true });
 badWordsFilter.addWords(...frenchBadwordsList.array);
 
@@ -29,9 +38,11 @@ const DATA_FILE = path.join(__dirname, 'messages.json');
 const MAX_ENTRIES = 50;
 const MAX_NAME_LENGTH = 100;
 const MAX_MESSAGE_LENGTH = 2000;
+const limiter = rateLimit({ windowMs: 60_000, max: 3 }); // 3 messages/minute
 
 app.use(cors());
 app.use(express.json({ limit: '10kb' }));
+app.use('/api/messages', limiter);
 
 function readMessages() {
   try {
@@ -72,6 +83,11 @@ app.post('/api/messages', (req, res) => {
 
   if (!name || !message || typeof name !== 'string' || typeof message !== 'string') {
     return res.status(400).json({ error: 'name et message requis' });
+  }
+
+  const result = MessageSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({ error: 'Données invalides' });
   }
 
   const sanitizedName = filterBadWords(sanitize(name)).slice(0, MAX_NAME_LENGTH);

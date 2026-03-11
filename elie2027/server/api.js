@@ -5,15 +5,44 @@ const path = require('path');
 const createDOMPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
 
+const { window } = new JSDOM('');
+const DOMPurify = createDOMPurify(window);
+
+const BadWords = require('bad-words');
+const frenchBadwordsList = require('french-badwords-list');
+
+const { z } = require('zod');
+const rateLimit = require('express-rate-limit');
+
+
+const MessageSchema = z.object({
+  name: z.string().min(1).max(100),
+  message: z.string().min(1).max(2000),
+});
+
+const badWordsFilter = new BadWords({ placeHolder: '*', emptyList: true });
+badWordsFilter.addWords(...frenchBadwordsList.array);
+
+function filterBadWords(str) {
+  if (typeof str !== 'string') return str;
+  try {
+    return badWordsFilter.clean(str);
+  } catch {
+    return str;
+  }
+}
+
 const app = express();
 const PORT = 3000;
 const DATA_FILE = path.join(__dirname, 'messages.json');
 const MAX_ENTRIES = 50;
 const MAX_NAME_LENGTH = 100;
 const MAX_MESSAGE_LENGTH = 2000;
+const limiter = rateLimit({ windowMs: 60_000, max: 3 }); // 3 messages/minute
 
 app.use(cors());
 app.use(express.json({ limit: '10kb' }));
+app.use('/api/messages', limiter);
 
 function readMessages() {
   try {
@@ -32,20 +61,17 @@ function writeMessages(messages) {
 
 function sanitize(str) {
   if (typeof str !== 'string') return '';
-  return str
-    .replace(/[<>]/g, '')
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;')
-    .replace(/\//g, '&#x2F;')
-    .trim();
+  return DOMPurify.sanitize(str, {
+    ALLOWED_TAGS: [],
+    ALLOWED_ATTR: [],
+  }).trim();
 }
 
 // GET all messages
 app.get('/api/messages', (_req, res) => {
   const messages = readMessages().map(msg => ({
-    name: sanitize(msg.name),
-    message: sanitize(msg.message),
+    name: filterBadWords(sanitize(msg.name)),
+    message: filterBadWords(sanitize(msg.message)),
     date: msg.date,
   }));
   res.json(messages);
@@ -59,8 +85,13 @@ app.post('/api/messages', (req, res) => {
     return res.status(400).json({ error: 'name et message requis' });
   }
 
-  const sanitizedName = sanitize(name).slice(0, MAX_NAME_LENGTH);
-  const sanitizedMessage = sanitize(message).slice(0, MAX_MESSAGE_LENGTH);
+  const result = MessageSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).json({ error: 'Données invalides' });
+  }
+
+  const sanitizedName = filterBadWords(sanitize(name)).slice(0, MAX_NAME_LENGTH);
+  const sanitizedMessage = filterBadWords(sanitize(message)).slice(0, MAX_MESSAGE_LENGTH);
 
   if (!sanitizedName || !sanitizedMessage) {
     return res.status(400).json({ error: 'Contenu invalide après sanitization' });
@@ -73,10 +104,11 @@ app.post('/api/messages', (req, res) => {
   };
 
   const messages = readMessages();
+
   messages.unshift(entry);
 
   if (messages.length > MAX_ENTRIES) {
-    messages.length = MAX_ENTRIES;
+    messages.pop();
   }
 
   writeMessages(messages);

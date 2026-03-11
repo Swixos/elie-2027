@@ -22,12 +22,12 @@
     "cors": "^2.8.6",
     "dompurify": "^3.3.3",
     "express": "^5.2.1",
-    "express-rate-limit": "^7.5.0",
-    "french-badwords-list": "^1.0.5",
-    "jsdom": "^26.1.0",
+    "express-rate-limit": "^8.3.1",
+    "french-badwords-list": "^1.0.7",
+    "jsdom": "^28.1.0",
     "rxjs": "~7.8.0",
-    "zod": "^3.24.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@angular/build": "^21.2.1",

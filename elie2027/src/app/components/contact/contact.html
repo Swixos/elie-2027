@@ -1,4 +1,5 @@
 <section id="contact" class="contact" aria-label="Contactez la campagne Elie 2027">
+  <app-avis></app-avis>
   <div class="container">
     <div class="contact-wrapper">
       <div class="contact-info">
@@ -8,16 +9,24 @@
         <div class="info-items">
           <div class="info-item">
             <div class="info-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
             </div>
             <div>
               <strong>QG de campagne</strong>
-              <span>Paris, France</span>
+              <span>Tel Aviv, Israël</span>
             </div>
           </div>
           <div class="info-item">
             <div class="info-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
             </div>
             <div>
               <strong>Email</strong>
@@ -26,11 +35,16 @@
           </div>
           <div class="info-item">
             <div class="info-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="2" y="5" width="20" height="14" rx="3" />
+                <polygon points="10,9 16,12 10,15" fill="#fff" />
+              </svg>
             </div>
             <div>
-              <strong>Site web</strong>
-              <span>elie2027.fr</span>
+              <strong>Campagne vidéo</strong>
+              <span class="video-link">
+                <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noopener">Voir la vidéo</a>
+              </span>
             </div>
           </div>
         </div>
@@ -38,27 +52,30 @@
 
       <div class="contact-form-wrapper">
         @if (submitted()) {
-          <div class="success-message">
-            <div class="success-icon">&#10003;</div>
-            <h3>Merci pour votre message !</h3>
-            <p>Nous vous recontacterons rapidement.</p>
-          </div>
+        <div class="success-message">
+          <div class="success-icon">&#10003;</div>
+          <h3>Merci pour votre message !</h3>
+          <p>Nous vous recontacterons rapidement.</p>
+        </div>
         } @else {
-          <form (ngSubmit)="onSubmit()" class="contact-form">
-            <div class="form-group">
-              <label for="name">Nom complet</label>
-              <input type="text" id="name" [ngModel]="name()" (ngModelChange)="name.set($event)" name="name" placeholder="Votre nom" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" [ngModel]="email()" (ngModelChange)="email.set($event)" name="email" placeholder="votre@email.fr" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" [ngModel]="message()" (ngModelChange)="message.set($event)" name="message" rows="4" placeholder="Votre message..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary full-width">Envoyer le message</button>
-          </form>
+        <form (ngSubmit)="onSubmit()" class="contact-form">
+          <div class="form-group">
+            <label for="name">Nom complet</label>
+            <input type="text" id="name" [ngModel]="name()" (ngModelChange)="name.set($event)" name="name"
+              placeholder="Votre nom" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" [ngModel]="email()" (ngModelChange)="email.set($event)" name="email"
+              placeholder="votre@email.fr" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" [ngModel]="message()" (ngModelChange)="message.set($event)" name="message" rows="4"
+              placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary full-width" (click)="downloadGif()">Envoyer le message</button>
+        </form>
         }
       </div>
     </div>

@@ -1,0 +1,185 @@
+// ─── Conteneur fixé en bas de page ────────────────────────────────────────
+.audio-level {
+  margin-bottom: 30px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  z-index: 1000;
+
+  // Apparition douce
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+// ─── Label ─────────────────────────────────────────────────────────────────
+.label {
+  font-size: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+// ─── Barre de progression ──────────────────────────────────────────────────
+.progress-bar {
+  position: relative;
+  width: 160px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover .progress-thumb {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.progress-fill {
+  height: 100%;
+  background: #1db954; // vert Spotify-like
+  border-radius: 2px;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+.progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  translate: 0 -50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+// ─── Temps ─────────────────────────────────────────────────────────────────
+.time {
+  font-size: 11px;
+  opacity: 0.75;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+// ─── Bouton générique (play + mute) ───────────────────────────────────────
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+  flex-shrink: 0;
+
+  &:hover  { background: rgba(255, 255, 255, 0.3); }
+  &:active { transform: scale(0.92); }
+}
+
+// ─── Groupe volume ─────────────────────────────────────────────────────────
+.volume-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.volume-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-width 0.3s ease, opacity 0.2s ease;
+
+  &.visible {
+    max-width: 140px;
+    opacity: 1;
+  }
+}
+
+.volume-value {
+  font-size: 11px;
+  opacity: 0.75;
+  white-space: nowrap;
+  min-width: 30px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+// ─── Slider HTML natif – styles cross-browser ─────────────────────────────
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  outline: none;
+  cursor: pointer;
+
+  // Track remplie (Chrome/Safari via gradient dynamique)
+  background: linear-gradient(
+    to right,
+    #1db954 0%,
+    #1db954 calc(var(--vol, 100) * 1%),
+    rgba(255, 255, 255, 0.25) calc(var(--vol, 100) * 1%),
+    rgba(255, 255, 255, 0.25) 100%
+  );
+
+  // Thumb Chrome / Safari
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    transition: transform 0.15s;
+    &:hover { transform: scale(1.25); }
+  }
+
+  // Thumb Firefox
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+
+  // Track Firefox
+  &::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.25);
+  }
+  &::-moz-range-progress {
+    height: 4px;
+    border-radius: 2px;
+    background: #1db954;
+  }
+}

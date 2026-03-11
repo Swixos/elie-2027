@@ -16,6 +16,37 @@
   --shadow-xl: 0 16px 60px rgba(0, 0, 0, 0.2);
   --radius: 16px;
   --radius-sm: 8px;
+  --nav-scrolled-bg: rgba(255, 255, 255, 0.95);
+  --card-icon-blue-bg: linear-gradient(135deg, #e8eeff 0%, #d0dcff 100%);
+  --card-icon-red-bg: linear-gradient(135deg, #ffe8ea 0%, #ffd0d4 100%);
+  --card-icon-white-bg: linear-gradient(135deg, #f0f0f5 0%, #e0e0e8 100%);
+  --card-number-color: rgba(0, 35, 149, 0.05);
+  --info-icon-bg: linear-gradient(135deg, #e8eeff 0%, #d0dcff 100%);
+  --about-tag-bg: linear-gradient(135deg, #e8eeff 0%, #d0dcff 100%);
+  --value-hover-bg: #e8eeff;
+  --input-placeholder: #aaa;
+}
+
+[data-theme="dark"] {
+  --blanc: #121220;
+  --gris-clair: #1a1a2e;
+  --gris: #2a2a3e;
+  --text-dark: #e8e8f0;
+  --text-light: #9ca3b0;
+  --bleu-clair: #3366ff;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 60px rgba(0, 0, 0, 0.6);
+  --nav-scrolled-bg: rgba(18, 18, 32, 0.95);
+  --card-icon-blue-bg: linear-gradient(135deg, #1a2550 0%, #0d1a3d 100%);
+  --card-icon-red-bg: linear-gradient(135deg, #3d1520 0%, #2d0e18 100%);
+  --card-icon-white-bg: linear-gradient(135deg, #252535 0%, #1e1e2e 100%);
+  --card-number-color: rgba(100, 140, 255, 0.08);
+  --info-icon-bg: linear-gradient(135deg, #1a2550 0%, #0d1a3d 100%);
+  --about-tag-bg: linear-gradient(135deg, #1a2550 0%, #0d1a3d 100%);
+  --value-hover-bg: #1a2550;
+  --input-placeholder: #555;
 }
 
 *, *::before, *::after {
@@ -135,7 +166,7 @@ a {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--gris-clair);
+  background: var(--blanc);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--bleu);

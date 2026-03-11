@@ -95,7 +95,7 @@
 .about-content {
   .about-tag {
     display: inline-block;
-    background: linear-gradient(135deg, #e8eeff 0%, #d0dcff 100%);
+    background: var(--about-tag-bg);
     color: var(--bleu);
     padding: 6px 16px;
     border-radius: 50px;
@@ -146,7 +146,7 @@
     transition: all 0.3s;
 
     &:hover {
-      background: #e8eeff;
+      background: var(--value-hover-bg);
       transform: translateX(4px);
     }
 

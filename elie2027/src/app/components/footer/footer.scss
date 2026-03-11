@@ -1,6 +1,6 @@
 .footer {
-  background: var(--text-dark);
-  color: var(--blanc);
+  background: var(--footer-bg);
+  color: var(--footer-text);
   padding: 80px 0 0;
   position: relative;
 }
@@ -11,7 +11,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--bleu) 33%, var(--blanc) 33%, var(--blanc) 66%, var(--rouge) 66%);
+  background: linear-gradient(90deg, var(--bleu) 33%, #ffffff 33%, #ffffff 66%, var(--rouge) 66%);
 }
 
 .footer-grid {

@@ -1,6 +1,6 @@
 .programme {
   padding: 120px 0;
-  background: var(--gris-clair);
+  background: var(--bg-section);
   position: relative;
 
   &::before {
@@ -10,7 +10,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--bleu) 33.33%, var(--blanc) 33.33%, var(--blanc) 66.66%, var(--rouge) 66.66%);
+    background: linear-gradient(90deg, var(--bleu) 33.33%, #ffffff 33.33%, #ffffff 66.66%, var(--rouge) 66.66%);
   }
 }
 
@@ -37,7 +37,7 @@
 }
 
 .programme-card {
-  background: var(--blanc);
+  background: var(--bg-card);
   border-radius: var(--radius);
   padding: 40px 32px;
   position: relative;

@@ -25,15 +25,27 @@ export class Hero implements OnInit, OnDestroy {
 
   next() {
     this.currentSlide.update(i => (i + 1) % this.slides.length);
+    this.resetTimer();
   }
 
   prev() {
     this.currentSlide.update(i => (i - 1 + this.slides.length) % this.slides.length);
+    this.resetTimer();
   }
 
   goTo(index: number) {
     this.currentSlide.set(index);
     this.resetTimer();
+  }
+
+  getSlidePosition(index: number): string {
+    const current = this.currentSlide();
+    const total = this.slides.length;
+    const diff = ((index - current) % total + total) % total;
+    if (diff === 0) return 'center';
+    if (diff === 1) return 'right';
+    if (diff === total - 1) return 'left';
+    return 'hidden';
   }
 
   private resetTimer() {

@@ -5,15 +5,19 @@ import { Injectable } from '@angular/core';
 })
 export class DownloadService {
 
-  download(url: string, filename?: string) {
+  private downloading = false;
+
+  download(url: string, filename: string) {
+    if (this.downloading) return;
+    this.downloading = true;
+
     const a = document.createElement('a');
     a.href = url;
-    a.download = filename ?? '';
-    a.style.display = 'none';
-
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    this.downloading = false;
   }
 
 }

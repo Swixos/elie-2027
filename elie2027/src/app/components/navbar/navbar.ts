@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, signal, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,9 +6,18 @@ import { Component, HostListener, signal } from '@angular/core';
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
-export class Navbar {
+export class Navbar implements OnInit {
   scrolled = signal(false);
   mobileOpen = signal(false);
+  darkMode = signal(false);
+
+  ngOnInit() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      this.darkMode.set(true);
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  }
 
   @HostListener('window:scroll')
   onScroll() {
@@ -21,5 +30,12 @@ export class Navbar {
 
   closeMobile() {
     this.mobileOpen.set(false);
+  }
+
+  toggleTheme() {
+    this.darkMode.update(v => !v);
+    const theme = this.darkMode() ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }
 }

@@ -61,15 +61,15 @@
     margin-bottom: 24px;
 
     &.blue {
-      background: linear-gradient(135deg, #e8eeff 0%, #d0dcff 100%);
+      background: var(--card-icon-blue-bg);
       color: var(--bleu);
     }
     &.red {
-      background: linear-gradient(135deg, #ffe8ea 0%, #ffd0d4 100%);
+      background: var(--card-icon-red-bg);
       color: var(--rouge);
     }
     &.white {
-      background: linear-gradient(135deg, #f0f0f5 0%, #e0e0e8 100%);
+      background: var(--card-icon-white-bg);
       color: var(--text-dark);
     }
   }
@@ -93,7 +93,7 @@
     right: 20px;
     font-size: 3rem;
     font-weight: 900;
-    color: rgba(0, 35, 149, 0.05);
+    color: var(--card-number-color);
     line-height: 1;
   }
 }

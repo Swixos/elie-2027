@@ -30,8 +30,28 @@
 
     <p class="hero-slogan">Dehors les autres</p>
 
-    <div class="hero-poster">
-      <img src="affiche.png" alt="Elie for Président - Élection Présidentielle 2027" />
+    <div class="hero-carousel">
+      <button class="carousel-arrow prev" (click)="prev()" aria-label="Image précédente">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="carousel-track">
+        @for (slide of slides; track slide.src) {
+          <div class="carousel-slide" [class.active]="$index === currentSlide()">
+            <img [src]="slide.src" [alt]="slide.alt" />
+          </div>
+        }
+      </div>
+
+      <button class="carousel-arrow next" (click)="next()" aria-label="Image suivante">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <div class="carousel-dots">
+        @for (slide of slides; track slide.src) {
+          <button class="dot" [class.active]="$index === currentSlide()" (click)="goTo($index)" [attr.aria-label]="'Image ' + ($index + 1)"></button>
+        }
+      </div>
     </div>
 
     <div class="hero-actions">

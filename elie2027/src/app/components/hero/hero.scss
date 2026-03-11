@@ -81,23 +81,100 @@
   max-width: 900px;
 }
 
-.hero-poster {
+.hero-carousel {
+  position: relative;
   margin-bottom: 40px;
   animation: fadeInUp 0.8s ease 0.2s both;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(237, 41, 57, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+
+  &.active {
+    opacity: 1;
+  }
 
   img {
-    max-width: 480px;
     width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(237, 41, 57, 0.3);
-    border: 3px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
 
-    &:hover {
-      transform: scale(1.02);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 50px rgba(237, 41, 57, 0.4);
-    }
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  &.prev { left: -20px; }
+  &.next { right: -20px; }
+}
+
+.hero-carousel:hover .carousel-arrow {
+  opacity: 1;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s;
+
+  &.active {
+    background: var(--rouge);
+    border-color: var(--rouge);
+    transform: scale(1.2);
+  }
+
+  &:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.3);
   }
 }
 

@@ -87,12 +87,14 @@
   animation: fadeInUp 0.8s ease 0.2s both;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  padding: 0 60px;
+  padding: 0;
 }
 
 .carousel-track {
   position: relative;
-  height: 520px;
+  height: 100vh;
+  min-height: 450px;
+  max-height: 700px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,8 +102,10 @@
 
 .carousel-slide {
   position: absolute;
-  width: 380px;
-  height: 480px;
+  width: 35vw;
+  min-width: 300px;
+  max-width: 550px;
+  height: 100%;
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -124,8 +128,8 @@
 
   &[data-pos="left"] {
     z-index: 2;
-    transform: translateX(-85%) scale(0.75);
-    opacity: 0.6;
+    transform: translateX(-90%) scale(0.85);
+    opacity: 0.7;
     filter: brightness(0.5);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(255, 255, 255, 0.1);
@@ -133,8 +137,8 @@
 
   &[data-pos="right"] {
     z-index: 2;
-    transform: translateX(85%) scale(0.75);
-    opacity: 0.6;
+    transform: translateX(90%) scale(0.85);
+    opacity: 0.7;
     filter: brightness(0.5);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(255, 255, 255, 0.1);
@@ -157,8 +161,8 @@
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -171,8 +175,8 @@
     transform: translateY(-50%) scale(1.1);
   }
 
-  &.prev { left: 40px; }
-  &.next { right: 40px; }
+  &.prev { left: 2vw; }
+  &.next { right: 2vw; }
 }
 
 .carousel-dots {
@@ -374,29 +378,28 @@
 }
 
 @media (max-width: 768px) {
-  .hero-carousel {
-    padding: 0 16px;
-  }
-
   .carousel-track {
-    height: 380px;
+    height: 50vh;
+    min-height: 350px;
   }
 
   .carousel-slide {
-    width: 240px;
-    height: 340px;
+    width: 60vw;
+    min-width: 220px;
 
     &[data-pos="left"] {
-      transform: translateX(-60%) scale(0.75);
+      transform: translateX(-70%) scale(0.8);
     }
     &[data-pos="right"] {
-      transform: translateX(60%) scale(0.75);
+      transform: translateX(70%) scale(0.8);
     }
   }
 
   .carousel-arrow {
-    &.prev { left: 8px; }
-    &.next { right: 8px; }
+    width: 36px;
+    height: 36px;
+    &.prev { left: 4px; }
+    &.next { right: 4px; }
   }
 
   .hero-stats {

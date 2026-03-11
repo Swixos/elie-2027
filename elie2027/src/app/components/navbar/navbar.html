@@ -1,4 +1,4 @@
-<nav [class.scrolled]="scrolled()" [class.mobile-open]="mobileOpen()">
+<nav aria-label="Navigation principale" [class.scrolled]="scrolled()" [class.mobile-open]="mobileOpen()">
   <div class="nav-container">
     <a href="#" class="logo">
       <span class="logo-text">ELIE</span>
@@ -12,7 +12,7 @@
       <a href="#contact" class="btn btn-primary nav-cta" (click)="closeMobile()">Rejoignez-nous</a>
     </div>
 
-    <button class="hamburger" (click)="toggleMobile()" [class.active]="mobileOpen()">
+    <button class="hamburger" aria-label="Menu de navigation" (click)="toggleMobile()" [class.active]="mobileOpen()">
       <span></span>
       <span></span>
       <span></span>

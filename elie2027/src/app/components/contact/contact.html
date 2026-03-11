@@ -79,5 +79,22 @@
         }
       </div>
     </div>
+
+    @if (messages().length > 0) {
+    <div class="messages-section">
+      <h3>Messages de la communauté <span class="accent">({{ messages().length }})</span></h3>
+      <div class="messages-grid">
+        @for (msg of messages(); track msg.date) {
+        <div class="message-card">
+          <div class="message-header">
+            <span class="message-author">{{ msg.name }}</span>
+            <span class="message-date">{{ formatDate(msg.date) }}</span>
+          </div>
+          <p class="message-body">{{ msg.message }}</p>
+        </div>
+        }
+      </div>
+    </div>
+    }
   </div>
 </section>

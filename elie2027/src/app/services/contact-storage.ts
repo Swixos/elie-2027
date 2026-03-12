@@ -21,7 +21,7 @@ export class ContactStorageService {
   }
 
   save(name: string, message: string): Observable<ContactMessage> {
-    return this.http.post<ContactMessage>(API_URL, {
+    return this.http.post<ContactMessage>(API_URL + '/add', {
       name: this.sanitize(name),
       message: this.sanitize(message),
     });

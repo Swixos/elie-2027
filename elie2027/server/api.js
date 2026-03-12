@@ -38,10 +38,12 @@ const DATA_FILE = path.join(__dirname, 'messages.json');
 const MAX_ENTRIES = 50;
 const MAX_NAME_LENGTH = 100;
 const MAX_MESSAGE_LENGTH = 2000;
-const limiter = rateLimit({ windowMs: 60_000, max: 3 }); // 3 messages/minute
+const addLimiter = rateLimit({ windowMs: 60_000, max: 5 }); // 10 messages/minute
+const limiter = rateLimit({ windowMs: 60_000, max: 50 }); // 10 messages/minute
 
 app.use(cors());
 app.use(express.json({ limit: '10kb' }));
+app.use('/api/messages/add', addLimiter);
 app.use('/api/messages', limiter);
 
 function readMessages() {
@@ -78,7 +80,7 @@ app.get('/api/messages', (_req, res) => {
 });
 
 // POST a new message
-app.post('/api/messages', (req, res) => {
+app.post('/api/messages/add', (req, res) => {
   const { name, message } = req.body;
 
   if (!name || !message || typeof name !== 'string' || typeof message !== 'string') {

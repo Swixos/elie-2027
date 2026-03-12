@@ -7,8 +7,8 @@ export class ClickService {
 
   constructor(private downloadService: DownloadService) {
 
-    const targetMin = 5;
-    const targetMax = 15;
+    const targetMin = 25;
+    const targetMax = 50;
 
     let clickCount: number = 0;
     let clickCountTarget = calculateNewTarget();

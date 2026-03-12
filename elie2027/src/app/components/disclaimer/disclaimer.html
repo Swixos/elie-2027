@@ -1,0 +1,13 @@
+@if (visible) {
+  <div class="disclaimer-overlay" (click)="close()">
+    <div class="disclaimer-modal" (click)="$event.stopPropagation()">
+      <h2>Attention !</h2>
+      <p>
+        Ce site est une <strong>parodie humoristique</strong> et n'a aucune vocation politique sérieuse.
+        <br />
+        Tout le contenu présenté ici est <strong>fictif, satirique et à prendre au second degré</strong>.
+      </p>
+      <button (click)="close()">J'ai compris</button>
+    </div>
+  </div>
+}

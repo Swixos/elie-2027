@@ -11,13 +11,19 @@ import { NgClass } from '@angular/common';
 export class Programme {
   @ViewChild('player') player!: AudioPlayerComponent;
 
-  activeSrc = 'audio/bigNeta.mp3';
-  activeLabel = 'Big Neta - Hymne officiel de la campagne';
+  activeSrc = 'audio/leSoleilRouge.mp3';
+  activeLabel = 'Le Soleil Rouge - Hymne officiel de la campagne';
   showBackground = false;
 
   onHover(): void {
     this.player?.playOnce();
     this.showBackground = true;
+  }
+
+  playBigNeta(): void {
+    this.activeSrc = 'audio/bigNeta.mp3';
+    this.activeLabel = 'Big Neta - Hymne de l\'alliance avec Israël';
+    this.player?.playOnce();
   }
 
   onMouseLeave(): void {

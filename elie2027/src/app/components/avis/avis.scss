@@ -303,8 +303,11 @@
   .confirm-card {
     padding: 28px 24px;
   }
+}
 
-  .president-peek img {
-    height: clamp(200px, 30vh, 320px);
+@media (max-width: 640px) {
+  .peek-image {
+    height: 120px !important;
+    width: 120px !important;
   }
 }

@@ -88,11 +88,15 @@
     font-size: 0.85rem;
     color: var(--bleu);
     text-transform: uppercase;
+    text-align: center;
     letter-spacing: 1px;
   }
 }
 
 .about-content {
+  display: flex;
+  flex-direction: column;
+
   .about-tag {
     display: inline-block;
     background: var(--about-tag-bg);
@@ -189,4 +193,9 @@
   .about {
     padding: 80px 0;
   }
+}
+
+.contact-btn {
+  width: fit-content;
+  align-self: center;
 }
